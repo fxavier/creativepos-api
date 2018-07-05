@@ -17,33 +17,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xavier.creativepos.api.event.RecursoCriadoEvent;
-import com.xavier.creativepos.api.model.Categoria;
-import com.xavier.creativepos.api.repository.CategoriaRepository;
+import com.xavier.creativepos.api.model.Pais;
+import com.xavier.creativepos.api.repository.PaisRepository;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/paises")
 @CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" })
-public class CategoriaResource {
+public class PaisResource {
 	
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private PaisRepository paisRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
-	
 	@GetMapping
-	public List<Categoria> pesquisar(){
-		return categoriaRepository.findAll();
+	public List<Pais> pesquisar(){
+		return paisRepository.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
-		Categoria categoriaCriada = categoriaRepository.save(categoria);
+	public ResponseEntity<Pais> criar(@Valid @RequestBody Pais pais, HttpServletResponse response) {
+		Pais paisCriado = paisRepository.save(pais);
 		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaCriada.getCodigo()));
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaCriada);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, paisCriado.getCodigo()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(paisCriado);
 	}
 
 }
