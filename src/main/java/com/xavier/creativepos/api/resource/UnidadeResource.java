@@ -17,33 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xavier.creativepos.api.event.RecursoCriadoEvent;
-import com.xavier.creativepos.api.model.Banco;
-import com.xavier.creativepos.api.repository.BancoRepository;
-
+import com.xavier.creativepos.api.model.Unidade;
+import com.xavier.creativepos.api.repository.UnidadeRepository;
 
 @RestController
-@RequestMapping("/bancos")
-@CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" })
-public class BancoResource {
+@RequestMapping("/unidades")
+@CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" }) 
+public class UnidadeResource {
 	
 	@Autowired
-	private BancoRepository bancoRepository;
+	private UnidadeRepository unidadeRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Banco> pesquisar(){
-		return bancoRepository.findAll();
+	public List<Unidade> pesquisar(){
+		return unidadeRepository.findAll();
 	}
 	
-	
 	@PostMapping
-	public ResponseEntity<Banco> criar(@Valid @RequestBody Banco banco, HttpServletResponse response) {
-		Banco bancoCriado = bancoRepository.save(banco);
+	public ResponseEntity<Unidade> criar(@Valid @RequestBody Unidade unidade, HttpServletResponse response) {
+		Unidade unidadeCriada = unidadeRepository.save(unidade);
 		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, bancoCriado.getCodigo()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(bancoCriado);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, unidadeCriada.getCodigo()));
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(unidadeCriada);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.xavier.creativepos.api.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,13 +45,12 @@ public class Produto {
 	@Column(name = "preco_venda")
 	private BigDecimal precovenda;
 	
-	private BigDecimal desconto1;
+	private BigDecimal desconto;
 	
-	private BigDecimal desconto2;
+	private BigDecimal margem_bruta;
 	
-	private BigDecimal desconto3;
+	private LocalDate data_validade;
 	
-	private BigDecimal desconto4;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_unidade")
@@ -148,36 +148,30 @@ public class Produto {
 		this.precovenda = precovenda;
 	}
 
-	public BigDecimal getDesconto1() {
-		return desconto1;
+	
+
+	public BigDecimal getDesconto() {
+		return desconto;
 	}
 
-	public void setDesconto1(BigDecimal desconto1) {
-		this.desconto1 = desconto1;
+	public void setDesconto(BigDecimal desconto) {
+		this.desconto = desconto;
 	}
 
-	public BigDecimal getDesconto2() {
-		return desconto2;
+	public BigDecimal getMargem_bruta() {
+		return margem_bruta;
 	}
 
-	public void setDesconto2(BigDecimal desconto2) {
-		this.desconto2 = desconto2;
+	public void setMargem_bruta(BigDecimal margem_bruta) {
+		this.margem_bruta = margem_bruta;
 	}
 
-	public BigDecimal getDesconto3() {
-		return desconto3;
+	public LocalDate getData_validade() {
+		return data_validade;
 	}
 
-	public void setDesconto3(BigDecimal desconto3) {
-		this.desconto3 = desconto3;
-	}
-
-	public BigDecimal getDesconto4() {
-		return desconto4;
-	}
-
-	public void setDesconto4(BigDecimal desconto4) {
-		this.desconto4 = desconto4;
+	public void setData_validade(LocalDate data_validade) {
+		this.data_validade = data_validade;
 	}
 
 	public Unidade getUnidade() {

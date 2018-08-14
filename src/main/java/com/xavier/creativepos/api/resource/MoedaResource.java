@@ -19,38 +19,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xavier.creativepos.api.event.RecursoCriadoEvent;
-import com.xavier.creativepos.api.model.Subcategoria;
-import com.xavier.creativepos.api.repository.SubcategoriaRepository;
+import com.xavier.creativepos.api.model.Moeda;
+import com.xavier.creativepos.api.repository.MoedaRepository;
 
 @CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" })
 @RestController
-@RequestMapping("/subcategorias")
-public class SubcategoriaResource {
+@RequestMapping("/moedas")
+public class MoedaResource {
 	
 	@Autowired
-	private SubcategoriaRepository subcategoriaRepository;
+	private MoedaRepository moedaRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	
 	@GetMapping
-	public List<Subcategoria> pesquisar() {
-		return subcategoriaRepository.findAll();
+	public List<Moeda> pesquisar() {
+		return moedaRepository.findAll();
 	}
 	
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Subcategoria> findById(@PathVariable Long codigo) {
-		Optional<Subcategoria> subcategoriaAchada = subcategoriaRepository.findById(codigo);
-		
-		return subcategoriaAchada.isPresent() ? ResponseEntity.ok(subcategoriaAchada.get()) : ResponseEntity.notFound().build();
+	public ResponseEntity<Moeda> findByCodigo(@PathVariable Long codigo) {
+		Optional<Moeda> moeda = moedaRepository.findById(codigo);
+		return moeda.isPresent() ? ResponseEntity.ok(moeda.get()) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Subcategoria> criar(@Valid @RequestBody Subcategoria subcategoria, HttpServletResponse response) {
-		Subcategoria subcategoriaCriada = subcategoriaRepository.save(subcategoria);
+	public ResponseEntity<Moeda> criar(@Valid @RequestBody Moeda moeda, HttpServletResponse response) {
+		Moeda moedaCriada = moedaRepository.save(moeda);
 		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, subcategoriaCriada.getCodigo()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(subcategoriaCriada);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, moedaCriada.getCodigo()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(moedaCriada);
 	}
 
 }

@@ -26,7 +26,7 @@ public class Fornecedor {
 	
 	private String nome;
 	
-	private String abrevatura;
+	private String abreviatura;
 	
 	private String morada;
 	
@@ -54,6 +54,7 @@ public class Fornecedor {
 	@Column(name = "saldo_cnt_corrente")
 	private BigDecimal saldoContaCorrente;
 	
+	@Column(name = "observacaoes")
 	private String observacoes;
 	
 	@Column(name = "bilhete_identidade")
@@ -113,12 +114,14 @@ public class Fornecedor {
 		this.nome = nome;
 	}
 
-	public String getAbrevatura() {
-		return abrevatura;
+	
+
+	public String getAbreviatura() {
+		return abreviatura;
 	}
 
-	public void setAbrevatura(String abrevatura) {
-		this.abrevatura = abrevatura;
+	public void setAbreviatura(String abreviatura) {
+		this.abreviatura = abreviatura;
 	}
 
 	public String getMorada() {

@@ -1,5 +1,6 @@
 package com.xavier.creativepos.api.resource;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ import com.xavier.creativepos.api.repository.projection.ResumoProduto;
 
 @RestController
 @RequestMapping("/produtos")
-@CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" })
+@CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" }) 
 public class ProdutoResource {
 	
 	@Autowired
@@ -44,16 +45,25 @@ public class ProdutoResource {
 			
 	}
 	
-	@GetMapping
+	/*@GetMapping
 	public Page<Produto> pesquisar(ProdutoFilter produtoFilter, Pageable pageable) {
 		return produtoRepository.filtrar(produtoFilter, pageable);
+	}*/
+	
+	@GetMapping
+	public List<Produto> listar() {
+		return produtoRepository.findAll();
 	}
 	
-	@GetMapping(params = "resumo")
+	/*@GetMapping(params = "resumo")
 	public Page<ResumoProduto> resumir(ProdutoFilter produtoFilter, Pageable pageable) {
 		return produtoRepository.resumir(produtoFilter, pageable);
-	}
+	}*/
 	
+	@GetMapping(params = "resumo")
+	public List<ResumoProduto> resumir() {
+		return produtoRepository.resumirProduto();
+	}
 	@PostMapping
 	public ResponseEntity<Produto> criar(@Valid @RequestBody Produto produto, HttpServletResponse response) {
 		Produto produtoCriado = produtoRepository.save(produto);

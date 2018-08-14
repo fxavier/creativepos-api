@@ -61,6 +61,21 @@ public class ProdutoRepositoryImpl implements ProdutoRepositoryQuery {
 		return new PageImpl<>(query.getResultList(), pageable, total(produtoFilter));
 	}
 	
+	@Override
+	public List<ResumoProduto> resumirProduto() {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<ResumoProduto> criteria = builder.createQuery(ResumoProduto.class);
+		Root<Produto> root = criteria.from(Produto.class);
+		
+		criteria.select(builder.construct(ResumoProduto.class
+				       , root.get(Produto_.referencia), root.get(Produto_.codigoBarras)
+				       , root.get(Produto_.nome), root.get(Produto_.stockActual)
+				       , root.get(Produto_.precovenda), root.get(Produto_.unidade).get(Unidade_.designacao)));
+		
+		TypedQuery<ResumoProduto> query = manager.createQuery(criteria);
+		return query.getResultList();
+	}
+	
 	private Predicate[] criarRestricoes(ProdutoFilter produtoFilter, CriteriaBuilder builder, Root<Produto> root) {
 		List<Predicate> predicates = new ArrayList<>();
 		
@@ -103,5 +118,8 @@ public class ProdutoRepositoryImpl implements ProdutoRepositoryQuery {
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
 	}
+
+
+	
 
 }

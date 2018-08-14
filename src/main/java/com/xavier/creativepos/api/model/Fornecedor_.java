@@ -13,6 +13,7 @@ public abstract class Fornecedor_ {
 	public static volatile SingularAttribute<Fornecedor, Long> numeroInterno;
 	public static volatile SingularAttribute<Fornecedor, String> bilheteIdentidade;
 	public static volatile SingularAttribute<Fornecedor, String> telefone;
+	public static volatile SingularAttribute<Fornecedor, String> abreviatura;
 	public static volatile SingularAttribute<Fornecedor, String> nib;
 	public static volatile SingularAttribute<Fornecedor, String> conta;
 	public static volatile SingularAttribute<Fornecedor, LocalDate> dataEmissao;
@@ -26,7 +27,6 @@ public abstract class Fornecedor_ {
 	public static volatile SingularAttribute<Fornecedor, String> swift;
 	public static volatile SingularAttribute<Fornecedor, Long> codigo;
 	public static volatile SingularAttribute<Fornecedor, String> website;
-	public static volatile SingularAttribute<Fornecedor, String> abrevatura;
 	public static volatile SingularAttribute<Fornecedor, BigDecimal> limiteCredito;
 	public static volatile SingularAttribute<Fornecedor, Banco> banco;
 	public static volatile SingularAttribute<Fornecedor, String> nome;

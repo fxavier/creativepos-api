@@ -19,38 +19,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xavier.creativepos.api.event.RecursoCriadoEvent;
-import com.xavier.creativepos.api.model.Subcategoria;
-import com.xavier.creativepos.api.repository.SubcategoriaRepository;
+import com.xavier.creativepos.api.model.Fabricante;
+import com.xavier.creativepos.api.repository.FabricanteRepository;
 
 @CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" })
 @RestController
-@RequestMapping("/subcategorias")
-public class SubcategoriaResource {
+@RequestMapping("/fabricantes")
+public class FabricanteResource {
 	
 	@Autowired
-	private SubcategoriaRepository subcategoriaRepository;
+	private FabricanteRepository fabricanteRepository;
 	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	public List<Subcategoria> pesquisar() {
-		return subcategoriaRepository.findAll();
+	public List<Fabricante> pesquisar() {
+		return fabricanteRepository.findAll();
 	}
 	
 	@GetMapping("/{codigo}")
-	public ResponseEntity<Subcategoria> findById(@PathVariable Long codigo) {
-		Optional<Subcategoria> subcategoriaAchada = subcategoriaRepository.findById(codigo);
+	public ResponseEntity<Fabricante> findByCodigo(@PathVariable Long codigo) {
+		Optional<Fabricante> fabricante = fabricanteRepository.findById(codigo);
 		
-		return subcategoriaAchada.isPresent() ? ResponseEntity.ok(subcategoriaAchada.get()) : ResponseEntity.notFound().build();
+		return fabricante.isPresent() ? ResponseEntity.ok(fabricante.get()) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Subcategoria> criar(@Valid @RequestBody Subcategoria subcategoria, HttpServletResponse response) {
-		Subcategoria subcategoriaCriada = subcategoriaRepository.save(subcategoria);
+	public ResponseEntity<Fabricante> criar(@Valid @RequestBody Fabricante fabricante, HttpServletResponse response) {
+		Fabricante fabricanteCriado = fabricanteRepository.save(fabricante);
 		
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, subcategoriaCriada.getCodigo()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(subcategoriaCriada);
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, fabricanteCriado.getCodigo()));
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(fabricanteCriado);
 	}
 
 }
