@@ -12,13 +12,13 @@ public abstract class Produto_ {
 
 	public static volatile SingularAttribute<Produto, Long> codigo;
 	public static volatile SingularAttribute<Produto, BigDecimal> desconto;
+	public static volatile SingularAttribute<Produto, Categoria> categoria;
 	public static volatile SingularAttribute<Produto, Long> quantidadeEncomenda;
 	public static volatile SingularAttribute<Produto, String> nome;
 	public static volatile SingularAttribute<Produto, Unidade> unidade;
 	public static volatile SingularAttribute<Produto, Long> stockMaximo;
 	public static volatile SingularAttribute<Produto, Long> pontoEncomenda;
 	public static volatile SingularAttribute<Produto, Long> stockMinimo;
-	public static volatile SingularAttribute<Produto, Subcategoria> subcategoria;
 	public static volatile SingularAttribute<Produto, Long> stockActual;
 	public static volatile SingularAttribute<Produto, BigDecimal> margem_bruta;
 	public static volatile SingularAttribute<Produto, LocalDate> data_validade;

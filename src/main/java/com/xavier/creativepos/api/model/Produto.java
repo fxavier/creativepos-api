@@ -61,8 +61,8 @@ public class Produto {
 	private Fabricante fabricante;
 	
 	@ManyToOne
-	@JoinColumn(name = "codigo_subcategoria")
-	private Subcategoria subcategoria;
+	@JoinColumn(name = "codigo_categoria")
+	private Categoria categoria;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_fornecedor")
@@ -190,12 +190,12 @@ public class Produto {
 		this.fabricante = fabricante;
 	}
 
-	public Subcategoria getSubcategoria() {
-		return subcategoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setSubcategoria(Subcategoria subcategoria) {
-		this.subcategoria = subcategoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Fornecedor getFornecedor() {
