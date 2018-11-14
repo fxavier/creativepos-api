@@ -44,7 +44,7 @@ public class Fornecedor {
 	private String website;
 	
 	@Column(name = "numero_contribuinte")
-	private String numeroContribuinte;
+	private Long numeroContribuinte;
 	
 	private String representante;
 	
@@ -180,11 +180,11 @@ public class Fornecedor {
 		this.website = website;
 	}
 
-	public String getNumeroContribuinte() {
+	public Long getNumeroContribuinte() {
 		return numeroContribuinte;
 	}
 
-	public void setNumeroContribuinte(String numeroContribuinte) {
+	public void setNumeroContribuinte(Long numeroContribuinte) {
 		this.numeroContribuinte = numeroContribuinte;
 	}
 

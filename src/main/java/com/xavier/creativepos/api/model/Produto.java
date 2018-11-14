@@ -39,9 +39,6 @@ public class Produto {
 	@Column(name = "pto_encomenda")
 	private Long pontoEncomenda;
 	
-	@Column(name = "qtd_encomenda")
-	private Long quantidadeEncomenda;
-	
 	@Column(name = "preco_venda")
 	private BigDecimal precovenda;
 	
@@ -130,14 +127,6 @@ public class Produto {
 
 	public void setPontoEncomenda(Long pontoEncomenda) {
 		this.pontoEncomenda = pontoEncomenda;
-	}
-
-	public Long getQuantidadeEncomenda() {
-		return quantidadeEncomenda;
-	}
-
-	public void setQuantidadeEncomenda(Long quantidadeEncomenda) {
-		this.quantidadeEncomenda = quantidadeEncomenda;
 	}
 
 	public BigDecimal getPrecovenda() {

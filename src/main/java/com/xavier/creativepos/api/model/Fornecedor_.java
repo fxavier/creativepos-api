@@ -18,7 +18,7 @@ public abstract class Fornecedor_ {
 	public static volatile SingularAttribute<Fornecedor, String> conta;
 	public static volatile SingularAttribute<Fornecedor, LocalDate> dataEmissao;
 	public static volatile SingularAttribute<Fornecedor, String> passaporte;
-	public static volatile SingularAttribute<Fornecedor, String> numeroContribuinte;
+	public static volatile SingularAttribute<Fornecedor, Long> numeroContribuinte;
 	public static volatile SingularAttribute<Fornecedor, String> telemovel;
 	public static volatile SingularAttribute<Fornecedor, String> fax;
 	public static volatile SingularAttribute<Fornecedor, String> email;

@@ -8,8 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,12 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xavier.creativepos.api.event.RecursoCriadoEvent;
 import com.xavier.creativepos.api.model.Produto;
 import com.xavier.creativepos.api.repository.ProdutoRepository;
-import com.xavier.creativepos.api.repository.filter.ProdutoFilter;
 import com.xavier.creativepos.api.repository.projection.ResumoProduto;
 
+@CrossOrigin(maxAge = 10, origins = { "*" }) 
 @RestController
 @RequestMapping("/produtos")
-@CrossOrigin(maxAge = 10, origins = { "http://localhost:4200" }) 
 public class ProdutoResource {
 	
 	@Autowired
@@ -64,6 +61,8 @@ public class ProdutoResource {
 	public List<ResumoProduto> resumir() {
 		return produtoRepository.resumirProduto();
 	}
+	
+	
 	@PostMapping
 	public ResponseEntity<Produto> criar(@Valid @RequestBody Produto produto, HttpServletResponse response) {
 		Produto produtoCriado = produtoRepository.save(produto);
