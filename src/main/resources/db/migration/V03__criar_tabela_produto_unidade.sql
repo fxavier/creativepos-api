@@ -10,34 +10,33 @@ codigo BIGSERIAL NOT NULL,
 referencia VARCHAR(20) NOT NULL,
 codigo_barras VARCHAR(50),
 nome VARCHAR(50) NOT NULL,
-peso BIGINT,
-largura BIGINT,
-altura BIGINT,
-comprimento BIGINT,
-volume BIGINT,
+peso NUMERIC(5, 2),
 stock_actual BIGINT DEFAULT 0,
-stock_minimo BIGINT DEFAULT 0,
-stock_maximo BIGINT DEFAULT 0,
-preco_custo DECIMAL(10, 2),
-despesas_acessorias DECIMAL(10, 2),
-outras_despesas DECIMAL(10, 2),
-custo_total DECIMAL(10, 2),
-preco_venda DECIMAL(10, 2) NOT NULL,
-lucro DECIMAL(10, 2),
-desconto DECIMAL(10, 2) NOT NULL,
+preco_custo NUMERIC(10, 2),
+despesas_acessorias NUMERIC(10, 2),
+outras_despesas NUMERIC(10, 2),
+custo_total NUMERIC(10, 2),
+preco_venda_actual NUMERIC(10, 2) NOT NULL,
+preco_venda_antigo NUMERIC(10, 2) DEFAULT 0,
+desconto NUMERIC(10, 2) DEFAULT 0,
 data_validade DATE,
-codigo_unidade BIGINT NOT NULL,
-codigo_categoria BIGINT NOT NULL,
-codigo_fornecedor BIGINT NOT NULL,
+codigo_subcategoria BIGINT,
+codigo_fornecedor BIGINT,
+codigo_tamanho BIGINT,
+codigo_cor BIGINT,
+codigo_imagem BIGINT,
 activo BOOLEAN DEFAULT true,
 PRIMARY KEY(codigo),
-CONSTRAINT fk_unidade_produto
-  FOREIGN KEY(codigo_unidade) REFERENCES unidade(codigo),
-CONSTRAINT fk_categoria_produto
-  FOREIGN KEY(codigo_categoria) REFERENCES categoria(codigo),
+CONSTRAINT fk_subcategoria_produto
+  FOREIGN KEY(codigo_subcategoria) REFERENCES subcategoria(codigo),
 CONSTRAINT fk_fornecedor_produto
-  FOREIGN KEY(codigo_fornecedor) REFERENCES fornecedor(codigo)
-
+  FOREIGN KEY(codigo_fornecedor) REFERENCES fornecedor(codigo),
+CONSTRAINT fk_tamanho_produto
+  FOREIGN KEY(codigo_tamanho) REFERENCES tamanho(codigo),
+CONSTRAINT fk_cor_produto
+  FOREIGN KEY(codigo_cor) REFERENCES cor(codigo),
+CONSTRAINT fk_imagem_produto
+  FOREIGN KEY(codigo_imagem) REFERENCES imagem(codigo)
 );
 
 CREATE TABLE armazem(

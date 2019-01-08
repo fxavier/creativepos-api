@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "produto")
@@ -25,7 +26,18 @@ public class Produto {
 	@Column(name = "codigo_barras")
 	private String codigoBarras;
 	
+	@NotNull
 	private String nome;
+	
+	private BigDecimal peso;
+	
+	private BigDecimal largura;
+	
+	private BigDecimal altura;
+	
+	private BigDecimal comprimento;
+	
+	private BigDecimal volume;
 	
 	@Column(name = "stock_actual")
 	private Long stockActual;
@@ -36,26 +48,37 @@ public class Produto {
 	@Column(name = "stock_maximo")
 	private Long stockMaximo;
 	
-	@Column(name = "pto_encomenda")
-	private Long pontoEncomenda;
+	@Column(name = "preco_custo")
+	private BigDecimal precoCusto;
+
+	@Column(name = "despesas_acessorias")
+	private BigDecimal despesasAcessorias;
 	
+	@Column(name = "outras_despesas")
+	private BigDecimal outrasDespesas;
+	
+	@NotNull
 	@Column(name = "preco_venda")
 	private BigDecimal precovenda;
 	
 	private BigDecimal desconto;
 	
-	private BigDecimal margem_bruta;
+	@Column(name = "lucro")
+	private BigDecimal lucro;
 	
-	private LocalDate data_validade;
+	@Column(name = "data_validade")
+	private LocalDate dataValidade;
+	
+	private Long rating;
+	
+	@Column(name = "img_url")
+	private String imgUrl;
 	
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_unidade")
 	private Unidade unidade;
 	
-	@ManyToOne
-	@JoinColumn(name = "codigo_fabricante")
-	private Fabricante fabricante;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
@@ -65,6 +88,7 @@ public class Produto {
 	@JoinColumn(name = "codigo_fornecedor")
 	private Fornecedor fornecedor;
 
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -121,14 +145,7 @@ public class Produto {
 		this.stockMaximo = stockMaximo;
 	}
 
-	public Long getPontoEncomenda() {
-		return pontoEncomenda;
-	}
-
-	public void setPontoEncomenda(Long pontoEncomenda) {
-		this.pontoEncomenda = pontoEncomenda;
-	}
-
+	
 	public BigDecimal getPrecovenda() {
 		return precovenda;
 	}
@@ -137,7 +154,85 @@ public class Produto {
 		this.precovenda = precovenda;
 	}
 
-	
+	public BigDecimal getPeso() {
+		return peso;
+	}
+
+	public void setPeso(BigDecimal peso) {
+		this.peso = peso;
+	}
+
+	public BigDecimal getLargura() {
+		return largura;
+	}
+
+	public void setLargura(BigDecimal largura) {
+		this.largura = largura;
+	}
+
+	public BigDecimal getAltura() {
+		return altura;
+	}
+
+	public void setAltura(BigDecimal altura) {
+		this.altura = altura;
+	}
+
+	public BigDecimal getComprimento() {
+		return comprimento;
+	}
+
+	public void setComprimento(BigDecimal comprimento) {
+		this.comprimento = comprimento;
+	}
+
+	public BigDecimal getVolume() {
+		return volume;
+	}
+
+	public void setVolume(BigDecimal volume) {
+		this.volume = volume;
+	}
+
+	public BigDecimal getPrecoCusto() {
+		return precoCusto;
+	}
+
+	public void setPrecoCusto(BigDecimal precoCusto) {
+		this.precoCusto = precoCusto;
+	}
+
+	public BigDecimal getDespesasAcessorias() {
+		return despesasAcessorias;
+	}
+
+	public void setDespesasAcessorias(BigDecimal despesasAcessorias) {
+		this.despesasAcessorias = despesasAcessorias;
+	}
+
+	public BigDecimal getOutrasDespesas() {
+		return outrasDespesas;
+	}
+
+	public void setOutrasDespesas(BigDecimal outrasDespesas) {
+		this.outrasDespesas = outrasDespesas;
+	}
+
+	public BigDecimal getLucro() {
+		return lucro;
+	}
+
+	public void setLucro(BigDecimal lucro) {
+		this.lucro = lucro;
+	}
+
+	public LocalDate getDataValidade() {
+		return dataValidade;
+	}
+
+	public void setDataValidade(LocalDate dataValidade) {
+		this.dataValidade = dataValidade;
+	}
 
 	public BigDecimal getDesconto() {
 		return desconto;
@@ -147,20 +242,21 @@ public class Produto {
 		this.desconto = desconto;
 	}
 
-	public BigDecimal getMargem_bruta() {
-		return margem_bruta;
+	
+	public Long getRating() {
+		return rating;
 	}
 
-	public void setMargem_bruta(BigDecimal margem_bruta) {
-		this.margem_bruta = margem_bruta;
+	public void setRating(Long rating) {
+		this.rating = rating;
 	}
 
-	public LocalDate getData_validade() {
-		return data_validade;
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setData_validade(LocalDate data_validade) {
-		this.data_validade = data_validade;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public Unidade getUnidade() {
@@ -171,13 +267,6 @@ public class Produto {
 		this.unidade = unidade;
 	}
 
-	public Fabricante getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
-	}
 
 	public Categoria getCategoria() {
 		return categoria;

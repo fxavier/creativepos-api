@@ -1,30 +1,30 @@
 package com.xavier.creativepos.api.model;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "subcategoria")
-public class Subcategoria {
-	
+@Table(name = "usuario")
+public class Usuario {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
-	@Column(name = "codigo_interno")
-	private String codigoInterno;
-	
+
 	private String nome;
-	
-	@ManyToOne
-	@JoinColumn(name = "codigo_categoria")
-	private Categoria categoria;
+	private String email;
+	private String senha;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "codigo_usuario")
+		, inverseJoinColumns = @JoinColumn(name = "codigo_permissao"))
+	private List<Permissao> permissoes;
 
 	public Long getCodigo() {
 		return codigo;
@@ -32,14 +32,6 @@ public class Subcategoria {
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getCodigoInterno() {
-		return codigoInterno;
-	}
-
-	public void setCodigoInterno(String codigoInterno) {
-		this.codigoInterno = codigoInterno;
 	}
 
 	public String getNome() {
@@ -50,12 +42,28 @@ public class Subcategoria {
 		this.nome = nome;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
 	}
 
 	@Override
@@ -74,7 +82,7 @@ public class Subcategoria {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Subcategoria other = (Subcategoria) obj;
+		Usuario other = (Usuario) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -82,7 +90,5 @@ public class Subcategoria {
 			return false;
 		return true;
 	}
-	
-	
 
 }

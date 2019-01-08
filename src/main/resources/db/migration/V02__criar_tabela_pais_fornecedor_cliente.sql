@@ -31,28 +31,22 @@ email VARCHAR(50),
 website VARCHAR(50),
 numero_contribuinte BIGINT,
 representante VARCHAR(50) NOT NULL,
-limite_credito DECIMAL(10, 2) NOT NULL,
-saldo_cnt_corrente DECIMAL(10, 2) NOT NULL,
+limite_credito NUMERIC,
+saldo_cnt_corrente NUMERIC,
 observacaoes TEXT,
 bilhete_identidade VARCHAR(20),
 data_emissao DATE,
 local_emissao VARCHAR(30),
 passaporte VARCHAR(50),
-conta VARCHAR(50) NOT NULL,
-nib VARCHAR(100) NOT NULL,
+conta VARCHAR(50),
+nib VARCHAR(100),
 iban VARCHAR(100),
 swift VARCHAR(100),
 activo BOOLEAN DEFAULT true,
 codigo_pais BIGINT,
-codigo_banco BIGINT,
-codigo_moeda BIGINT,
 PRIMARY KEY(codigo),
 CONSTRAINT fk_pais_fornecedor
-  FOREIGN KEY(codigo_pais) REFERENCES pais(codigo),
-CONSTRAINT fk_banco_fornecedor
-  FOREIGN KEY(codigo_banco) REFERENCES banco(codigo),
-CONSTRAINT fk_moeda_fornecedor
-  FOREIGN KEY(codigo_moeda) REFERENCES moeda(codigo)
+  FOREIGN KEY(codigo_pais) REFERENCES pais(codigo)
 );
 
 CREATE TABLE cliente(
@@ -65,26 +59,10 @@ telefone VARCHAR(30),
 telemovel VARCHAR(30),
 fax VARCHAR(30),
 email VARCHAR(50),
-website VARCHAR(50),
-numero_contribuinte BIGINT,
-limite_credito DECIMAL(10, 2) NOT NULL,
-saldo_cnt_corrente DECIMAL(10, 2) NOT NULL,
 observacaoes TEXT,
-bilhete_identidade VARCHAR(20),
-data_emissao DATE,
-local_emissao VARCHAR(30),
-passaporte VARCHAR(50),
-conta VARCHAR(50) NOT NULL,
-nib VARCHAR(100) NOT NULL,
-iban VARCHAR(100),
-swift VARCHAR(100),
 activo BOOLEAN DEFAULT true,
 codigo_pais BIGINT,
-codigo_banco BIGINT,
 PRIMARY KEY(codigo),
 CONSTRAINT fk_pais_cliente
-  FOREIGN KEY(codigo_pais) REFERENCES pais(codigo),
-CONSTRAINT fk_banco_cliente
-  FOREIGN KEY(codigo_banco) REFERENCES banco(codigo)
-
+  FOREIGN KEY(codigo_pais) REFERENCES pais(codigo)
 );

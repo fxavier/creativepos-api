@@ -1,20 +1,16 @@
 package com.xavier.creativepos.api.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "fabricante")
-public class Fabricante {
-	
+@Table(name = "permissao")
+public class Permissao {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
-	private String nome;
+	private String descricao;
 
 	public Long getCodigo() {
 		return codigo;
@@ -24,12 +20,12 @@ public class Fabricante {
 		this.codigo = codigo;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -48,7 +44,7 @@ public class Fabricante {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Fabricante other = (Fabricante) obj;
+		Permissao other = (Permissao) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
@@ -56,7 +52,5 @@ public class Fabricante {
 			return false;
 		return true;
 	}
-	
-	
 
 }
